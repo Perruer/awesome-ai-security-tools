@@ -784,6 +784,25 @@
           "title": "Frameworks, Rule Standards & Benchmarks",
           "entries": [
             {
+              "name": "Project CodeGuard",
+              "repo": "cosai-oasis/project-codeguard",
+              "org": "CoSAI / OASIS",
+              "desc": "Model-agnostic secure-coding rules and skills framework with translators for popular coding agents, validators, release artifacts, and an MCP server for centrally distributing the rules.",
+              "license": "CC BY 4.0",
+              "status": [
+                "open_source"
+              ],
+              "flags": [
+                "license_caveat"
+              ],
+              "note": "— **note:** framework and ruleset, not a deterministic scanner or runtime enforcement boundary; repository content uses CC BY 4.0 rather than a conventional software license.",
+              "metrics": {
+                "stars": 338,
+                "updated": "2026-09-18",
+                "snapshot": "2026-09-21"
+              }
+            },
+            {
               "name": "asamm",
               "repo": "scadastrangelove/asamm",
               "org": "CyberOK / S. Gordeychik",
@@ -1128,6 +1147,104 @@
         {
           "title": "Runtime Protection & Enforcement",
           "entries": [
+            {
+              "name": "OpenShell",
+              "repo": "NVIDIA/OpenShell",
+              "org": "NVIDIA",
+              "desc": "Policy-governed runtime for autonomous and coding agents with container or microVM-backed sandboxes, filesystem/process/network controls, endpoint-bound credential injection, and audit logs.",
+              "license": "Apache-2.0",
+              "status": [
+                "open_source"
+              ],
+              "flags": [
+                "early_stage",
+                "heavy_runtime",
+                "telemetry"
+              ],
+              "note": "— **note:** pre-release runtime whose effective isolation depends on the selected compute driver and policy; Kubernetes and GPU paths are experimental. Anonymous operational telemetry is enabled by default but can be disabled at deployment time or compiled out.",
+              "sources": [
+                {
+                  "label": "NVIDIA agent-stack security model",
+                  "url": "https://developer.nvidia.com/blog/where-security-fits-in-an-ai-agent-stack/"
+                }
+              ],
+              "metrics": {
+                "stars": 8715,
+                "updated": "2026-09-21",
+                "snapshot": "2026-09-21"
+              }
+            },
+            {
+              "name": "Numbat",
+              "repo": "perplexityai/numbat",
+              "org": "Perplexity AI",
+              "desc": "Endpoint-local visibility and detection for AI-agent activity across hooks, plugins, OTLP, and on-disk artifacts, with CEL rules, multi-step sequence detections, and forensic reconstruction.",
+              "license": "Apache-2.0",
+              "status": [
+                "open_source"
+              ],
+              "note": "— **note:** monitoring is the default posture; blocking is opt-in, limited to supported synchronous pre-action hooks, and the shipped rules are monitor-only until operators explicitly configure enforcement.",
+              "metrics": {
+                "stars": 1069,
+                "updated": "2026-09-15",
+                "snapshot": "2026-09-21"
+              }
+            },
+            {
+              "name": "agentsh",
+              "repo": "canyonroad/agentsh",
+              "org": "Canyon Road",
+              "desc": "Execution-layer policy shell for AI agents that intercepts file, network, process, signal, and selected database activity and emits structured audit events.",
+              "license": "Apache-2.0",
+              "status": [
+                "open_source"
+              ],
+              "note": "— **note:** the shell shim bypasses policy for non-TTY stdin unless `--force` is used, which is critical for headless agents and CI. Linux is the production target; native macOS enforcement is alpha and native Windows drivers are not yet production-ready.",
+              "metrics": {
+                "stars": 385,
+                "updated": "2026-09-15",
+                "snapshot": "2026-09-21"
+              }
+            },
+            {
+              "name": "brood-box",
+              "repo": "stacklok/brood-box",
+              "org": "Stacklok",
+              "desc": "Experimental runner for coding agents in hardware-isolated microVMs with copy-on-write workspace snapshots, egress profiles, selective secret forwarding, and file-by-file review before applying changes.",
+              "license": "Apache-2.0",
+              "status": [
+                "open_source"
+              ],
+              "flags": [
+                "early_stage",
+                "heavy_runtime"
+              ],
+              "note": "— **note:** APIs and behavior are explicitly experimental; `workspace-mode=direct` bypasses snapshot isolation and writes directly to the workspace, so it is suitable only for already-trusted interactive work.",
+              "metrics": {
+                "stars": 72,
+                "updated": "2026-09-18",
+                "snapshot": "2026-09-21"
+              }
+            },
+            {
+              "name": "Greywall",
+              "repo": "GreyhavenHQ/greywall",
+              "org": "Greyhaven",
+              "desc": "Kernel-enforced filesystem, network, syscall, and command-policy wrapper for coding agents on Linux and macOS, with a separate traffic-observability mode and least-privilege profile generation.",
+              "license": "Apache-2.0",
+              "status": [
+                "open_source"
+              ],
+              "flags": [
+                "early_stage"
+              ],
+              "note": "— **note:** deny-by-default applies to `greywall`; `greywatch` is intentionally permissive and records rather than blocks activity. Verify the effective platform backend and selected mode before treating it as an enforcement boundary.",
+              "metrics": {
+                "stars": 298,
+                "updated": "2026-08-13",
+                "snapshot": "2026-09-21"
+              }
+            },
             {
               "name": "nono",
               "repo": "nolabs-ai/nono",
@@ -2265,6 +2382,39 @@
       "anchor": "aiml-supply-chain--model-security",
       "intro": "Tools for securing model artifacts, serialized ML files, AI/ML supply-chain surfaces, and malicious-package detection datasets/benchmarks.",
       "entries": [
+        {
+          "name": "AI BOM",
+          "repo": "cisco-ai-defense/aibom",
+          "org": "Cisco AI Defense",
+          "desc": "Inventories models, agents, tools, MCP clients and servers, datasets, prompts, guardrails, secrets, and cloud AI resources, with CycloneDX 1.6 output and policy workflows.",
+          "license": "Apache-2.0",
+          "status": [
+            "open_source"
+          ],
+          "flags": [
+            "requires_api_key",
+            "model_dependent",
+            "telemetry"
+          ],
+          "note": "— **note:** core inventory is distinct from the narrower model-file AIsbom already listed; the extended `analyze` pipeline requires an external LLM provider and can send analysis context off-host. Optional sanitized Galileo telemetry is separately configurable.",
+          "sources": [
+            {
+              "label": "Cisco announcement",
+              "url": "https://blogs.cisco.com/ai/know-your-ai-stack-introducing-ai-bom-in-cisco-ai-defense"
+            }
+          ],
+          "related": [
+            {
+              "label": "AIsbom",
+              "url": "https://github.com/Lab700xOrg/aisbom"
+            }
+          ],
+          "metrics": {
+            "stars": 110,
+            "updated": "2026-09-17",
+            "snapshot": "2026-09-21"
+          }
+        },
         {
           "name": "Fraim",
           "repo": "fraim-dev/fraim",
@@ -3643,6 +3793,86 @@
       "anchor": "ai-powered-sast--secure-code-review",
       "intro": "Static analysis and secure code review enhanced with LLMs.",
       "entries": [
+        {
+          "name": "Cloudflare Security Audit Skill",
+          "repo": "cloudflare/security-audit-skill",
+          "org": "Cloudflare",
+          "desc": "Coding-agent skill for a multi-phase source-security audit with reconnaissance, coverage-led hunting, independent verification, structured findings, and a separate record-validation pass.",
+          "license": "MIT",
+          "status": [
+            "open_source"
+          ],
+          "flags": [
+            "model_dependent"
+          ],
+          "note": "— **note:** workflow skill, not a standalone scanner; it requires a capable coding agent with parallel subagents and an OS-enforced sandbox. Results are nondeterministic, and Cloudflare reports that one run finds only about half of the vulnerabilities found across repeated runs.",
+          "sources": [
+            {
+              "label": "Cloudflare vulnerability-harness write-up",
+              "url": "https://blog.cloudflare.com/build-your-own-vulnerability-harness/"
+            }
+          ],
+          "metrics": {
+            "stars": 18424,
+            "updated": "2026-09-14",
+            "snapshot": "2026-09-21"
+          }
+        },
+        {
+          "name": "Mantis",
+          "repo": "google/mantis",
+          "org": "Google",
+          "desc": "Security-review skills and an ADK reference harness for vulnerability discovery, triage, reproduction, patching, and deterministic verification gates.",
+          "license": "Apache-2.0",
+          "status": [
+            "open_source"
+          ],
+          "flags": [
+            "research",
+            "model_dependent",
+            "heavy_runtime",
+            "authorized_testing_only"
+          ],
+          "note": "— **note:** can generate and execute code while reproducing findings; use only on authorized source in an isolated restricted environment. Model output and proposed findings still require expert verification.",
+          "sources": [
+            {
+              "label": "Google Cloud announcement",
+              "url": "https://cloud.google.com/blog/products/identity-security/getting-started-with-the-mantis-harness-to-find-and-fix-bugs"
+            }
+          ],
+          "metrics": {
+            "stars": 1678,
+            "updated": "2026-09-18",
+            "snapshot": "2026-09-21"
+          }
+        },
+        {
+          "name": "VulnHunter (Capital One)",
+          "repo": "capitalone/VulnHunter",
+          "org": "Capital One",
+          "desc": "Attacker-oriented source-review workflow with forward analysis from exposed entry points, a finding-falsification pass, evidence-backed remediation, and a separate fix-verification flow.",
+          "license": "Apache-2.0",
+          "status": [
+            "open_source"
+          ],
+          "flags": [
+            "requires_api_key",
+            "model_dependent",
+            "authorized_testing_only"
+          ],
+          "note": "— **note:** built and optimized for Claude Code with an Opus-class model, so source context is processed under the selected provider's terms and results remain model-dependent. Use only on code you are authorized to assess.",
+          "sources": [
+            {
+              "label": "Capital One announcement",
+              "url": "https://www.capitalone.com/tech/open-source/"
+            }
+          ],
+          "metrics": {
+            "stars": 1016,
+            "updated": "2026-08-15",
+            "snapshot": "2026-09-21"
+          }
+        },
         {
           "name": "Vulnhuntr",
           "repo": "protectai/vulnhuntr",
@@ -5088,6 +5318,59 @@
           "title": "Scanners, Evals & Guardrails",
           "entries": [
             {
+              "name": "RAMPART",
+              "repo": "microsoft/RAMPART",
+              "org": "Microsoft",
+              "desc": "Pytest-native framework for repeatable adversarial and benign safety regression tests against AI agents, with statistical trials and evaluators for responses, tool calls, and external side effects.",
+              "license": "MIT",
+              "status": [
+                "open_source"
+              ],
+              "flags": [
+                "requires_api_key",
+                "model_dependent"
+              ],
+              "note": "— **note:** test framework built on PyRIT, not a runtime protection layer; users must supply target adapters and model credentials, and passing its scenarios does not establish production safety beyond the tested behaviors.",
+              "sources": [
+                {
+                  "label": "Microsoft Security announcement",
+                  "url": "https://www.microsoft.com/en-us/security/blog/2026/05/20/introducing-rampart-and-clarity-open-source-tools-to-bring-safety-into-agent-development-workflow/"
+                }
+              ],
+              "related": [
+                {
+                  "label": "PyRIT",
+                  "url": "https://github.com/microsoft/PyRIT"
+                }
+              ],
+              "metrics": {
+                "stars": 414,
+                "updated": "2026-09-18",
+                "snapshot": "2026-09-21"
+              }
+            },
+            {
+              "name": "Agent OPFOR",
+              "repo": "KeyValueSoftwareSystems/agent-opfor",
+              "org": "KeyValue Software Systems",
+              "desc": "Adversary-emulation toolkit for AI agents, LLM applications, and MCP servers with multi-turn attack templates, tool and memory tests, trace-aware evaluation, CLI, SDK, browser, MCP, and skill interfaces.",
+              "license": "Apache-2.0",
+              "status": [
+                "open_source"
+              ],
+              "flags": [
+                "requires_api_key",
+                "model_dependent",
+                "authorized_testing_only"
+              ],
+              "note": "— **note:** attacker and judge workflows depend on configured LLM providers and add inference cost; trace integrations can expose internal agent data to the selected observability service. Use only against systems you own or are authorized to test.",
+              "metrics": {
+                "stars": 580,
+                "updated": "2026-09-13",
+                "snapshot": "2026-09-21"
+              }
+            },
+            {
               "name": "NuGuard",
               "repo": "NuGuardAI/nuguard",
               "org": "NuGuard AI",
@@ -6421,6 +6704,54 @@
       "intro": "Offensive agents and the benchmarks used to evaluate them.",
       "entries": [
         {
+          "name": "Inspect Cyber",
+          "repo": "UKGovernmentBEIS/inspect_cyber",
+          "org": "UK AI Security Institute",
+          "desc": "Installable Inspect extension for defining and running agentic cyber evaluations with standardized YAML configurations, adaptable sandboxes, scenario variants, scoring, and solvability verification.",
+          "license": "MIT",
+          "status": [
+            "open_source"
+          ],
+          "flags": [
+            "research",
+            "heavy_runtime",
+            "authorized_testing_only"
+          ],
+          "note": "— **note:** evaluation framework rather than a benchmark result or defensive control; Docker, Kubernetes, or other configured sandboxes can contain intentionally vulnerable targets and should remain isolated from production networks.",
+          "related": [
+            {
+              "label": "inspect_evals",
+              "url": "https://github.com/UKGovernmentBEIS/inspect_evals"
+            }
+          ],
+          "metrics": {
+            "stars": 40,
+            "updated": "2026-06-18",
+            "snapshot": "2026-09-21"
+          }
+        },
+        {
+          "name": "GenAI Red Team Lab",
+          "repo": "GenAI-Security-Project/GenAI-Red-Team-Lab",
+          "org": "OWASP GenAI Security Project",
+          "desc": "Collection of intentionally vulnerable GenAI sandboxes, exploitation examples, and tutorials for prompt injection, memory poisoning, orchestration attacks, guardrail bypass, and related red-team exercises.",
+          "license": "Apache-2.0",
+          "status": [
+            "open_source"
+          ],
+          "flags": [
+            "research",
+            "heavy_runtime",
+            "authorized_testing_only"
+          ],
+          "note": "— **note:** training and research lab, not a scanner; it contains exploitation code and deliberately vulnerable services that should run only in disposable isolated environments.",
+          "metrics": {
+            "stars": 53,
+            "updated": "2026-09-20",
+            "snapshot": "2026-09-21"
+          }
+        },
+        {
           "name": "SWE-agent (EnIGMA)",
           "repo": "SWE-agent/SWE-agent",
           "desc": "EnIGMA offensive-CTF mode; SOTA on NYU CTF, InterCode-CTF, and Cybench (v0.7 branch).",
@@ -7084,6 +7415,17 @@
       "title": "Related Awesome Lists",
       "anchor": "related-awesome-lists",
       "entries": [
+        {
+          "kind": "awesome_list",
+          "name": "awesome-security-agent-harnesses",
+          "repo": "Ed-Marcavage/awesome-security-agent-harnesses",
+          "desc": "Focused CC0 catalog of vulnerability-discovery and pentest agent harnesses, security skills, sandboxes, MCP integrations, benchmarks, and evaluation research.",
+          "metrics": {
+            "stars": 22,
+            "updated": "2026-09-04",
+            "snapshot": "2026-09-21"
+          }
+        },
         {
           "kind": "awesome_list",
           "name": "awesome-llm-cybersecurity-tools",

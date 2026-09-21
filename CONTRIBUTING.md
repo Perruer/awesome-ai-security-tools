@@ -42,9 +42,12 @@ python3 gen_readme.py --check
 Rendered emoji badges are generated from structured fields:
 
 - `open_source` → `🟢`
-- `research` → `🔬`
+- `status: [research]` → legacy research-only classification (`🔬`)
 - `commercial_open` → `🟠`
 - warning flags such as `license_caveat`, `no_license`, `noncommercial`, `copyleft`, or `abliterated_or_uncensored` → `⚠️`
+- `flags: [research]` → marks an open-source or commercial-open entry as a research/evaluation artifact (`🔬` when the legacy `research` status is not already present)
+- `telemetry` → the tool can emit usage or operational telemetry; disclose defaults and opt-out controls in `note`
+- `model_dependent` → material behavior or verdict quality depends on an LLM/model; disclose provider, credential, data-egress, and reproducibility constraints in `note`
 
 Related awesome-list entries use `kind: "awesome_list"` and live in the regular `Related Awesome Lists` section in `data/sections.json`.
 

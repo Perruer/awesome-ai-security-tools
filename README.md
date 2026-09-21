@@ -7,7 +7,7 @@
 
 **Type legend:** 🟢 public source / open-source · 🔬 research (paper / benchmark / dataset / framework) · 🟠 commercial with open components · ⚠️ restrictive, non-commercial, or unclear/no license — check before use.
 
-GitHub-hosted entries show static **★ stars** and **last-commit** snapshots; refresh them with `python3 scripts/update_github_metrics.py` before release. Most recently refreshed entry: 2026-09-14. Hugging Face model entries show license, access, and artifact metadata. Ordering within a section favors flagship and actively maintained projects.
+GitHub-hosted entries show static **★ stars** and **last-commit** snapshots; refresh them with `python3 scripts/update_github_metrics.py` before release. Most recently refreshed entry: 2026-09-21. Hugging Face model entries show license, access, and artifact metadata. Ordering within a section favors flagship and actively maintained projects.
 
 ---
 
@@ -123,6 +123,7 @@ Securing the AI agents themselves — auditing coding agents (Claude Code, Codex
 
 ### Frameworks, Rule Standards & Benchmarks
 
+- **[Project CodeGuard](https://github.com/cosai-oasis/project-codeguard)** 🟢⚠️ — Model-agnostic secure-coding rules and skills framework with translators for popular coding agents, validators, release artifacts, and an MCP server for centrally distributing the rules. *(CoSAI / OASIS)* — **note:** framework and ruleset, not a deterministic scanner or runtime enforcement boundary; repository content uses CC BY 4.0 rather than a conventional software license. *(★ 338 · updated 2026-09-18)*
 - **[asamm](https://github.com/scadastrangelove/asamm)** 🔬 — *Agentic SAMM* — an OWASP SAMM extension for AI-driven development: an entry-point-based threat taxonomy plus 17 controls across 5 SAMM functions (Governance, Design, Implementation, Verification, Operations) with L1/L2/L3 maturity. License: CC BY-SA 4.0. *(CyberOK / S. Gordeychik)* *(★ 17 · updated 2026-07-26)*
   - **Sources:** [OWASP SAMM](https://owaspsamm.org/) · [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) · [NCSC Secure AI Guidelines](https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development) · [MCP Security Best Practices](https://modelcontextprotocol.io/)
   - **Related:** [agent-audit](https://github.com/scadastrangelove/agent-audit)
@@ -151,6 +152,12 @@ Securing the AI agents themselves — auditing coding agents (Claude Code, Codex
 
 ### Runtime Protection & Enforcement
 
+- **[OpenShell](https://github.com/NVIDIA/OpenShell)** 🟢 — Policy-governed runtime for autonomous and coding agents with container or microVM-backed sandboxes, filesystem/process/network controls, endpoint-bound credential injection, and audit logs. *(NVIDIA)* — **note:** pre-release runtime whose effective isolation depends on the selected compute driver and policy; Kubernetes and GPU paths are experimental. Anonymous operational telemetry is enabled by default but can be disabled at deployment time or compiled out. *(★ 8,715 · updated 2026-09-21)*
+  - **Sources:** [NVIDIA agent-stack security model](https://developer.nvidia.com/blog/where-security-fits-in-an-ai-agent-stack/)
+- **[Numbat](https://github.com/perplexityai/numbat)** 🟢 — Endpoint-local visibility and detection for AI-agent activity across hooks, plugins, OTLP, and on-disk artifacts, with CEL rules, multi-step sequence detections, and forensic reconstruction. *(Perplexity AI)* — **note:** monitoring is the default posture; blocking is opt-in, limited to supported synchronous pre-action hooks, and the shipped rules are monitor-only until operators explicitly configure enforcement. *(★ 1,069 · updated 2026-09-15)*
+- **[agentsh](https://github.com/canyonroad/agentsh)** 🟢 — Execution-layer policy shell for AI agents that intercepts file, network, process, signal, and selected database activity and emits structured audit events. *(Canyon Road)* — **note:** the shell shim bypasses policy for non-TTY stdin unless `--force` is used, which is critical for headless agents and CI. Linux is the production target; native macOS enforcement is alpha and native Windows drivers are not yet production-ready. *(★ 385 · updated 2026-09-15)*
+- **[brood-box](https://github.com/stacklok/brood-box)** 🟢 — Experimental runner for coding agents in hardware-isolated microVMs with copy-on-write workspace snapshots, egress profiles, selective secret forwarding, and file-by-file review before applying changes. *(Stacklok)* — **note:** APIs and behavior are explicitly experimental; `workspace-mode=direct` bypasses snapshot isolation and writes directly to the workspace, so it is suitable only for already-trusted interactive work. *(★ 72 · updated 2026-09-18)*
+- **[Greywall](https://github.com/GreyhavenHQ/greywall)** 🟢 — Kernel-enforced filesystem, network, syscall, and command-policy wrapper for coding agents on Linux and macOS, with a separate traffic-observability mode and least-privilege profile generation. *(Greyhaven)* — **note:** deny-by-default applies to `greywall`; `greywatch` is intentionally permissive and records rather than blocks activity. Verify the effective platform backend and selected mode before treating it as an enforcement boundary. *(★ 298 · updated 2026-08-13)*
 - **[nono](https://github.com/nolabs-ai/nono)** 🟢 — Least-privilege sandbox for AI coding agents that isolates the agent and delegated tools with composable filesystem, network, credential-proxy, and command policies. *(NoLabs)* — **note:** APIs are still stabilizing ahead of the 1.0 release; review every pulled profile before use. *(★ 3,687 · updated 2026-08-17)*
   - **Related:** [microsandbox](https://github.com/superradcompany/microsandbox) · [ToolHive](https://github.com/stacklok/toolhive)
 - **[cplt](https://github.com/navikt/cplt)** 🟢 — Kernel-backed sandbox wrapper for AI coding agents that applies Seatbelt on macOS or Landlock and seccomp on Linux, content-pins approvals for repository policy, filters environment and resource access, and gates selected git and GitHub commands. *(NAV (Norwegian Labour and Welfare Administration))* — **note:** no native Windows backend; the standard posture permits outbound HTTPS on port 443 and warns rather than blocks `git push`, while stricter egress and push blocking require explicit configuration. Linux has documented limitations around Git metadata, localhost, and SSH-agent isolation, so review the threat model and effective policy for the target platform. *(★ 114 · updated 2026-09-06)*
@@ -240,6 +247,9 @@ Securing the AI agents themselves — auditing coding agents (Claude Code, Codex
 
 Tools for securing model artifacts, serialized ML files, AI/ML supply-chain surfaces, and malicious-package detection datasets/benchmarks.
 
+- **[AI BOM](https://github.com/cisco-ai-defense/aibom)** 🟢 — Inventories models, agents, tools, MCP clients and servers, datasets, prompts, guardrails, secrets, and cloud AI resources, with CycloneDX 1.6 output and policy workflows. *(Cisco AI Defense)* — **note:** core inventory is distinct from the narrower model-file AIsbom already listed; the extended `analyze` pipeline requires an external LLM provider and can send analysis context off-host. Optional sanitized Galileo telemetry is separately configurable. *(★ 110 · updated 2026-09-17)*
+  - **Sources:** [Cisco announcement](https://blogs.cisco.com/ai/know-your-ai-stack-introducing-ai-bom-in-cisco-ai-defense)
+  - **Related:** [AIsbom](https://github.com/Lab700xOrg/aisbom)
 - **[Fraim](https://github.com/fraim-dev/fraim)** 🟢 — Framework for AI-powered security workflows including LLM SAST and IaC analysis with SARIF/HTML output. *(★ 160 · updated 2025-12-01)*
   - **Related:** [sast-skills](https://github.com/utkusen/sast-skills)
 - **[Adversarial Robustness Toolbox (ART)](https://github.com/Trusted-AI/adversarial-robustness-toolbox)** 🟢 — Flagship machine-learning security library for evaluating and defending models against evasion, poisoning, extraction, and inference attacks across major ML frameworks. *(LF AI & Data / IBM)* *(★ 6,179 · updated 2025-11-13)*
@@ -380,6 +390,12 @@ Hyper-specific AI/ML tools for a single offensive-security, recon, or detection 
 
 Static analysis and secure code review enhanced with LLMs.
 
+- **[Cloudflare Security Audit Skill](https://github.com/cloudflare/security-audit-skill)** 🟢 — Coding-agent skill for a multi-phase source-security audit with reconnaissance, coverage-led hunting, independent verification, structured findings, and a separate record-validation pass. *(Cloudflare)* — **note:** workflow skill, not a standalone scanner; it requires a capable coding agent with parallel subagents and an OS-enforced sandbox. Results are nondeterministic, and Cloudflare reports that one run finds only about half of the vulnerabilities found across repeated runs. *(★ 18,424 · updated 2026-09-14)*
+  - **Sources:** [Cloudflare vulnerability-harness write-up](https://blog.cloudflare.com/build-your-own-vulnerability-harness/)
+- **[Mantis](https://github.com/google/mantis)** 🟢🔬 — Security-review skills and an ADK reference harness for vulnerability discovery, triage, reproduction, patching, and deterministic verification gates. *(Google)* — **note:** can generate and execute code while reproducing findings; use only on authorized source in an isolated restricted environment. Model output and proposed findings still require expert verification. *(★ 1,678 · updated 2026-09-18)*
+  - **Sources:** [Google Cloud announcement](https://cloud.google.com/blog/products/identity-security/getting-started-with-the-mantis-harness-to-find-and-fix-bugs)
+- **[VulnHunter (Capital One)](https://github.com/capitalone/VulnHunter)** 🟢 — Attacker-oriented source-review workflow with forward analysis from exposed entry points, a finding-falsification pass, evidence-backed remediation, and a separate fix-verification flow. *(Capital One)* — **note:** built and optimized for Claude Code with an Opus-class model, so source context is processed under the selected provider's terms and results remain model-dependent. Use only on code you are authorized to assess. *(★ 1,016 · updated 2026-08-15)*
+  - **Sources:** [Capital One announcement](https://www.capitalone.com/tech/open-source/)
 - **[Vulnhuntr](https://github.com/protectai/vulnhuntr)** 🟢 — Zero-shot vulnerability discovery in Python repos via LLM call-chain analysis; credited with a 0-day RCE in Ragflow. *(Protect AI)* *(★ 2,741 · updated 2025-02-06)*
   - **Related:** [IRIS](https://github.com/iris-sast/iris)
 - **[deepsec](https://github.com/vercel-labs/deepsec)** 🟢 — Agent-powered security harness for scanning large codebases with coding agents, resumable parallel runs, custom matchers, and optional revalidation. *(Vercel Labs)* *(★ 7,695 · updated 2026-08-13)*
@@ -536,6 +552,10 @@ Tools for attacking and defending LLM applications themselves.
 
 ### Scanners, Evals & Guardrails
 
+- **[RAMPART](https://github.com/microsoft/RAMPART)** 🟢 — Pytest-native framework for repeatable adversarial and benign safety regression tests against AI agents, with statistical trials and evaluators for responses, tool calls, and external side effects. *(Microsoft)* — **note:** test framework built on PyRIT, not a runtime protection layer; users must supply target adapters and model credentials, and passing its scenarios does not establish production safety beyond the tested behaviors. *(★ 414 · updated 2026-09-18)*
+  - **Sources:** [Microsoft Security announcement](https://www.microsoft.com/en-us/security/blog/2026/05/20/introducing-rampart-and-clarity-open-source-tools-to-bring-safety-into-agent-development-workflow/)
+  - **Related:** [PyRIT](https://github.com/microsoft/PyRIT)
+- **[Agent OPFOR](https://github.com/KeyValueSoftwareSystems/agent-opfor)** 🟢 — Adversary-emulation toolkit for AI agents, LLM applications, and MCP servers with multi-turn attack templates, tool and memory tests, trace-aware evaluation, CLI, SDK, browser, MCP, and skill interfaces. *(KeyValue Software Systems)* — **note:** attacker and judge workflows depend on configured LLM providers and add inference cost; trace integrations can expose internal agent data to the selected observability service. Use only against systems you own or are authorized to test. *(★ 580 · updated 2026-09-13)*
 - **[NuGuard](https://github.com/NuGuardAI/nuguard)** 🟢 — Generates an AI-SBOM, statically analyzes agentic applications, red-teams live targets for prompt injection/tool misuse/data exfiltration, and validates behavioral policy compliance with SARIF, JSON, and Markdown reports. *(NuGuard AI)* — **note:** beta project; live red-team scans actively probe the target and require authorization. LLM-assisted features need provider credentials, and the optional NuGuard.ai hosted offering adds commercial features. *(★ 23 · updated 2026-08-14)*
   - **Related:** [garak](https://github.com/NVIDIA/garak) · [Medusa](https://github.com/Pantheon-Security/medusa)
 - **[garak](https://github.com/NVIDIA/garak)** 🟢 — The LLM vulnerability scanner — probes for prompt injection, jailbreaks, data leakage, and more. *(NVIDIA)* *(★ 8,834 · updated 2026-08-14)*
@@ -651,6 +671,9 @@ Honeypots and deception that use LLMs to simulate convincing systems.
 
 Offensive agents and the benchmarks used to evaluate them.
 
+- **[Inspect Cyber](https://github.com/UKGovernmentBEIS/inspect_cyber)** 🟢🔬 — Installable Inspect extension for defining and running agentic cyber evaluations with standardized YAML configurations, adaptable sandboxes, scenario variants, scoring, and solvability verification. *(UK AI Security Institute)* — **note:** evaluation framework rather than a benchmark result or defensive control; Docker, Kubernetes, or other configured sandboxes can contain intentionally vulnerable targets and should remain isolated from production networks. *(★ 40 · updated 2026-06-18)*
+  - **Related:** [inspect_evals](https://github.com/UKGovernmentBEIS/inspect_evals)
+- **[GenAI Red Team Lab](https://github.com/GenAI-Security-Project/GenAI-Red-Team-Lab)** 🟢🔬 — Collection of intentionally vulnerable GenAI sandboxes, exploitation examples, and tutorials for prompt injection, memory poisoning, orchestration attacks, guardrail bypass, and related red-team exercises. *(OWASP GenAI Security Project)* — **note:** training and research lab, not a scanner; it contains exploitation code and deliberately vulnerable services that should run only in disposable isolated environments. *(★ 53 · updated 2026-09-20)*
 - **[SWE-agent (EnIGMA)](https://github.com/SWE-agent/SWE-agent)** 🟢🔬 — EnIGMA offensive-CTF mode; SOTA on NYU CTF, InterCode-CTF, and Cybench (v0.7 branch). *(★ 20,069 · updated 2026-07-16)*
   - **Related:** [Cybench](https://github.com/andyzorigin/cybench) · [NYU CTF Bench](https://github.com/NYU-LLM-CTF/NYU_CTF_Bench) · [InterCode](https://github.com/princeton-nlp/intercode)
 - **[Cybench](https://github.com/andyzorigin/cybench)** 🔬 — 40 professional CTF tasks across 4 competitions; widely used by AI safety institutes. *(★ 311 · updated 2026-07-09)*
@@ -711,6 +734,7 @@ AI tooling for cloud/IaC security, digital forensics, OSINT, and phishing detect
 
 ## Related Awesome Lists
 
+- **[awesome-security-agent-harnesses](https://github.com/Ed-Marcavage/awesome-security-agent-harnesses)** — Focused CC0 catalog of vulnerability-discovery and pentest agent harnesses, security skills, sandboxes, MCP integrations, benchmarks, and evaluation research. *(★ 22 · updated 2026-09-04)*
 - **[awesome-llm-cybersecurity-tools](https://github.com/tenable/awesome-llm-cybersecurity-tools)** — Tenable's list (archived but a strong reference). *(★ 488 · updated 2024-04-08)*
 - **[Awesome-LLM4Cybersecurity](https://github.com/tmylla/Awesome-LLM4Cybersecurity)** — 600+ papers on LLMs for cybersecurity. *(★ 1,748 · updated 2026-07-08)*
 - **[awesome-ai-cybersecurity](https://github.com/ElNiak/awesome-ai-cybersecurity)** — Broad AI-for-security collection. *(★ 151 · updated 2026-08-13)*
@@ -770,7 +794,7 @@ Example entry:
 }
 ```
 
-Status values: `open_source`, `research`, `commercial_open`. Common flags: `license_caveat`, `early_stage`, `archived`, `heavy_runtime`, `requires_api_key`, `authorized_testing_only`, `commercial_features`, `no_license`, `noncommercial`, `copyleft`, `abliterated_or_uncensored`.
+Status values: `open_source`, `research`, `commercial_open`. Common flags: `license_caveat`, `early_stage`, `archived`, `heavy_runtime`, `requires_api_key`, `authorized_testing_only`, `commercial_features`, `telemetry`, `model_dependent`, `research`, `no_license`, `noncommercial`, `copyleft`, `abliterated_or_uncensored`.
 
 Guidelines: link the canonical upstream repo (not a fork); verify the URL resolves; tag the correct type and add a caveat flag/note for non-permissive, non-commercial, unclear, missing, or restrictive licenses; prefer real, installable projects over blog-only references.
 

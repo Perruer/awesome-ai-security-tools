@@ -39,6 +39,9 @@ KNOWN_FLAGS = WARNING_FLAGS | {
     "requires_api_key",
     "authorized_testing_only",
     "commercial_features",
+    "telemetry",
+    "model_dependent",
+    "research",
 }
 
 
@@ -89,6 +92,8 @@ def entry_tags(entry: dict[str, Any]) -> str:
     statuses = entry.get("status", [])
     flags = entry.get("flags", [])
     tags = "".join(STATUS_BADGES[s] for s in STATUS_ORDER if s in statuses)
+    if "research" in flags and "research" not in statuses:
+        tags += STATUS_BADGES["research"]
     if any(flag in WARNING_FLAGS for flag in flags):
         tags += "⚠️"
     return tags
@@ -314,7 +319,7 @@ def build(data: dict[str, Any]) -> str:
     out.append("}")
     out.append("```")
     out.append("")
-    out.append("Status values: `open_source`, `research`, `commercial_open`. Common flags: `license_caveat`, `early_stage`, `archived`, `heavy_runtime`, `requires_api_key`, `authorized_testing_only`, `commercial_features`, `no_license`, `noncommercial`, `copyleft`, `abliterated_or_uncensored`.")
+    out.append("Status values: `open_source`, `research`, `commercial_open`. Common flags: `license_caveat`, `early_stage`, `archived`, `heavy_runtime`, `requires_api_key`, `authorized_testing_only`, `commercial_features`, `telemetry`, `model_dependent`, `research`, `no_license`, `noncommercial`, `copyleft`, `abliterated_or_uncensored`.")
     out.append("")
     out.append("Guidelines: link the canonical upstream repo (not a fork); verify the URL resolves; tag the correct type and add a caveat flag/note for non-permissive, non-commercial, unclear, missing, or restrictive licenses; prefer real, installable projects over blog-only references.")
     out.append("")
